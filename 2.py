@@ -36,13 +36,14 @@ import matplotlib.pyplot as plt
 #B = 1/(kB*T)
 B = 1
 
-x = 20    #np.random.uniform(0,1)
-dx = np.random.uniform(-0.1,0.1)
-x_prime = x + dx
+n = 100 #number of iterations
 
+x = 20    #np.random.uniform(0,1)
 
 def H(x):
     return x**2
+
+for 
 
 # Metropolis Algorithm WIP
 
@@ -59,11 +60,13 @@ def Metro(H, H_prime, B):
         P_metro = np.exp(-B*DH)
     return P_metro
 
+hits = 0
 
 def accept(P_metro):
     p = np.random.uniform(0,1)
     if P_metro > p:
         accept.append(x_prime)
+        hits += 1
         #append stuff
 #    else:
         #do not append stuff
@@ -78,4 +81,11 @@ print(a)
 #    P_metro += 1
 #elif expo < 1: # Energy increases
 #    P_metro += expo
+    
+
+# Iteration loop WIP
+
+while hits <= n:
+    #do markov chain
+    
     
