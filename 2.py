@@ -40,16 +40,17 @@ n = 100 #number of iterations
 
 x = 20    #np.random.uniform(0,1)
 
+dx = np.random.uniform(-0.1,0.1)
+x_prime = x + dx
+
 def H(x):
     return x**2
 
-for 
 
 # Metropolis Algorithm WIP
 
 
-acccept =  np.array([])
-
+accept =  np.array([])
 
 
 def Metro(H, H_prime, B):
@@ -66,7 +67,6 @@ def accept(P_metro):
     p = np.random.uniform(0,1)
     if P_metro > p:
         accept.append(x_prime)
-        hits += 1
         #append stuff
 #    else:
         #do not append stuff
@@ -85,7 +85,27 @@ print(a)
 
 # Iteration loop WIP
 
-while hits <= n:
+#while hits <= n:
     #do markov chain
+    
+    
+# Boolean accept WIP
+
+def Accept(P_metro):
+    p = np.random.uniform(0,1)
+    if P_metro > p:
+        return True
+    else:
+        return False
+    
+#while iteration condition
+#   if accept(P_metro) = True
+#       accept.append(x)
+#       x = x_prime
+#       hits +=1
+#       
+#   
+    
+
     
     
