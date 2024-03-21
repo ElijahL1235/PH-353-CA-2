@@ -36,26 +36,46 @@ import matplotlib.pyplot as plt
 #B = 1/(kB*T)
 B = 1
 
-x = 2    #np.random.uniform(0,1)
-x_test = np.random.uniform(-1,1)
-x_prime = x + x_test
+x = 20    #np.random.uniform(0,1)
+dx = np.random.uniform(-0.1,0.1)
+x_prime = x + dx
 
-H = x**2
 
-H_prime = x_prime**2
-
-DH = H_prime - H
-
-expo = np.exp(-B*DH)
-
+def H(x):
+    return x**2
 
 # Metropolis Algorithm WIP
 
-P_metro = 0
 
-if expo > 1: # Energy decreases
-    P_metro += 1
-elif expo < 1: # Energy increases
-    P_metro += expo
-    x
+acccept =  np.array([])
+
+
+
+def Metro(H, H_prime, B):
+    DH = H_prime - H
+    if np.exp(-B*DH) > 1:
+        P_metro = 1
+    else: 
+        P_metro = np.exp(-B*DH)
+    return P_metro
+
+
+def accept(P_metro):
+    p = np.random.uniform(0,1)
+    if P_metro > p:
+        accept.append(x_prime)
+        #append stuff
+#    else:
+        #do not append stuff
+        
+    
+a = Metro(H(x),H(x_prime),B)
+print(a)
+
+
+
+#if expo > 1: # Energy decreases
+#    P_metro += 1
+#elif expo < 1: # Energy increases
+#    P_metro += expo
     
