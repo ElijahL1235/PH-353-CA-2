@@ -65,9 +65,10 @@ hits = 0
 
 def accept(P_metro):
     p = np.random.uniform(0,1)
-    if P_metro > p:
-        accept.append(x_prime)
+    #if P_metro > p:
+        #accept.append(x_prime)
         #append stuff
+        #volumes = np.append(volumes, val) is the structure 
 #    else:
         #do not append stuff
         
