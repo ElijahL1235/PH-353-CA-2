@@ -50,5 +50,3 @@ while hits <= n:
         hits +=1
         
 plt.plot(accepted)
-
-#test to see if stuff ported over onedrive properly
