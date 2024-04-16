@@ -26,6 +26,12 @@ n_per_bin = 18                          # Number of iterations per bin, there wi
 # due to autocorrelation, we should bin the remaining 9000 points first
 # before we average. let's try bin size of 18 as that yields 500 bins from 9000 points
 
+<<<<<<< HEAD
+=======
+x = 10                                  # Initial condition
+
+hits = 0                                # Number of accepted x values
+>>>>>>> 79fc42534129b17505efc8c6a214f3683ea07601
 
 def H(x):                               # Hamiltonian
     return x**2
@@ -45,17 +51,26 @@ def Accept(P_metro):                    # Accept function
     else:
         return False                    # If not, assign 'false'; the change is not accepted
 
+<<<<<<< HEAD
+=======
+    
+accepted = np.array([])                 # Array of accepted values of H', currently empty but will be appended to later
+>>>>>>> 79fc42534129b17505efc8c6a214f3683ea07601
 
 while hits <= n:                        # While the number of accepted changes is less than or   
                                         # equal to the number of desired iterations
     
-    dx = np.random.uniform(-0.01,0.01)  # Generating the random change in x
+    dx = np.random.uniform(-1,1)  # Generating the random change in x
     x_prime = x + dx                    # New x = starting x + change in x
     
     P_metro = Metro(H(x),H(x_prime),B)  # metro probability given by metro function passing H(old x), H(new x), beta
     
     if Accept(P_metro) == True:         # If the accept function gives out 'true' for the metro probability, we accept...
+<<<<<<< HEAD
         accepted = np.append(accepted, H(x_prime))
+=======
+        accepted = np.append(accepted, x_prime**2)
+>>>>>>> 79fc42534129b17505efc8c6a214f3683ea07601
         x = x_prime                     # the new x into the list of accepted changes, and we set the x' to be the...
         hits +=1                        # starting x for the next iteration. We also 'count' the change by adding 1 to 'hits'
         
@@ -73,4 +88,15 @@ for a in range(500):
 
 plt.figure()
 plt.plot(accepted)
+<<<<<<< HEAD
 plt.plot(bins)
+=======
+plt.grid()
+plt.title('Thermalised data set')
+
+
+# BINNING
+
+
+    
+>>>>>>> 79fc42534129b17505efc8c6a214f3683ea07601
