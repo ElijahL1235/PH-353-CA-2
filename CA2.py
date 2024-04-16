@@ -17,7 +17,7 @@ n = 10000                               # Number of iterations
 # due to autocorrelation, we should bin the remaining 9000 points first
 # before we average. let's try bin size of 18 as that yields 500 bins from 9000 points
 
-x = 2                                   # Initial condition
+x = 10                                  # Initial condition
 
 hits = 0                                # Number of accepted x values
 
@@ -45,13 +45,13 @@ accepted = np.array([])                 # Array of accepted changes, currently e
 while hits <= n:                        # While the number of accepted changes is less than or   
                                         # equal to the number of desired iterations
     
-    dx = np.random.uniform(-0.01,0.01)  # Generating the random change in x
+    dx = np.random.uniform(-1,1)  # Generating the random change in x
     x_prime = x + dx                    # New x = starting x + change in x
     
     P_metro = Metro(H(x),H(x_prime),B)  # metro probability given by metro function passing H(old x), H(new x), beta
     
     if Accept(P_metro) == True:         # If the accept function gives out 'true' for the metro probability, we accept...
-        accepted = np.append(accepted, x_prime)
+        accepted = np.append(accepted, x_prime**2)
         x = x_prime                     # the new x into the list of accepted changes, and we set the x' to be the...
         hits +=1                        # starting x for the next iteration. We also 'count' the change by adding 1 to 'hits'
         
@@ -64,6 +64,8 @@ accepted = accepted[1000:]
 
 plt.figure()
 plt.plot(accepted)
+plt.grid()
+plt.title('Thermalised data set')
 
 
 # BINNING
