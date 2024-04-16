@@ -12,6 +12,11 @@ B = 100                                 # NB for B around 10 it takes too long t
 
 n = 10000                               # Number of iterations
 
+# for reweighting, consider removing the first 1000 results 
+# then for the gaussian system bit, we take the mean of the remaining n-1000 points
+# due to autocorrelation, we should bin the remaining 9000 points first
+# before we average. let's try bin size of 18 as that yields 500 bins
+
 x = 2                                   # Initial condition
 
 hits = 0                                # Number of accepted x values
@@ -43,11 +48,11 @@ while hits <= n:                        # While the number of accepted changes i
     dx = np.random.uniform(-0.01,0.01)  # Generating the random change in x
     x_prime = x + dx                    # New x = starting x + change in x
     
-    P_metro = Metro(H(x),H(x_prime),B)
+    P_metro = Metro(H(x),H(x_prime),B)  # metro probability given by metro function passing H(old x), H(new x), beta
     
-    if Accept(P_metro) == True:
+    if Accept(P_metro) == True:         # If the accept function gives out 'true' for the metro probability, we accept...
         accepted = np.append(accepted, x_prime)
-        x = x_prime
-        hits +=1
+        x = x_prime                     # the new x into the list of accepted changes, and we set the x' to be the...
+        hits +=1                        # starting x for the next iteration. We also 'count' the change by adding 1 to 'hits'
         
-plt.plot(accepted)
+plt.plot(accepted)                      # plot the accepted x's 
