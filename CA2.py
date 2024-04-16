@@ -56,6 +56,11 @@ while hits <= n:                        # While the number of accepted changes i
         hits +=1                        # starting x for the next iteration. We also 'count' the change by adding 1 to 'hits'
         
 plt.plot(accepted)                      # Plot the accepted x's 
+plt.grid()                              
+plt.title('Monte Carlo Data Set')
+plt.xlabel('Monte Carlo Time')          # x axis is the monte carlo time / number of data points
+plt.ylabel('Hamiltonian') 
+
 
 accepted = accepted[1001:]
 
@@ -78,11 +83,15 @@ def Bin(accepted, no_bins = 50):
 yvals =  [row[0] for row in Bin(accepted)]
 
 plt.figure()
-plt.plot(accepted)
+plt.plot(accepted)                      # Plots the trimmed accepted data; data that has now thermalised
 plt.grid()
 plt.title('Thermalised data set')
+plt.xlabel('Monte Carlo Time')
+plt.ylabel('Hamiltonian')
 
 plt.figure()
 plt.plot(yvals)
 plt.grid()
 plt.title('Binned Data Set')
+plt.xlabel('')
+plt.ylabel('')
