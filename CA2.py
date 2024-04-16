@@ -40,7 +40,7 @@ def Accept(P_metro):                    # Accept function
         return False                    # If not, assign 'false'; the change is not accepted
 
     
-accepted = np.array([])                 # Array of accepted changes, currently empty but will be appended to later
+accepted = np.array([])                 # Array of accepted values of H', currently empty but will be appended to later
 
 while hits <= n:                        # While the number of accepted changes is less than or   
                                         # equal to the number of desired iterations
@@ -70,12 +70,5 @@ plt.title('Thermalised data set')
 
 # BINNING
 
-n_per_bin = 18
 
-bins = np.zeros(9000)                  #9000 is the length of accepted after trimming
-for a in range(9000):
-    in_the_bin = 0
-    for b in range(n_per_bin):
-        dx = np.random.uniform(-0.01, 0.01)
-        
     
