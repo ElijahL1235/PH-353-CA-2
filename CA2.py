@@ -56,3 +56,11 @@ while hits <= n:                        # While the number of accepted changes i
         hits +=1                        # starting x for the next iteration. We also 'count' the change by adding 1 to 'hits'
         
 plt.plot(accepted)                      # plot the accepted x's 
+
+
+# Removing the first 1000 values:
+
+accepted = accepted[1000:]
+
+plt.figure()
+plt.plot(accepted)
