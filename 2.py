@@ -106,6 +106,14 @@ def Accept(P_metro):
 #       hits +=1
 #       
 #   
+
+
+
+# Binning WIP
+
+from scipy.stats import binned_statistic as binner
+
+
     
 
     
