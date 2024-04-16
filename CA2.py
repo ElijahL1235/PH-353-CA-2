@@ -15,7 +15,7 @@ n = 10000                               # Number of iterations
 # for reweighting, consider removing the first 1000 results 
 # then for the gaussian system bit, we take the mean of the remaining n-1000 points
 # due to autocorrelation, we should bin the remaining 9000 points first
-# before we average. let's try bin size of 18 as that yields 500 bins
+# before we average. let's try bin size of 18 as that yields 500 bins from 9000 points
 
 x = 2                                   # Initial condition
 
@@ -64,3 +64,16 @@ accepted = accepted[1000:]
 
 plt.figure()
 plt.plot(accepted)
+
+
+# BINNING
+
+n_per_bin = 18
+
+bins = np.zeros(9000)                  #9000 is the length of accepted after trimming
+for a in range(9000):
+    in_the_bin = 0
+    for b in range(n_per_bin):
+        dx = np.random.uniform(-0.01, 0.01)
+        
+    
