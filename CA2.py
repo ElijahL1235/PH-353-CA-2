@@ -49,13 +49,13 @@ while hits <= n:                        # While the number of accepted changes i
     dx = np.random.uniform(-0.1,0.1)    # Generating the random change in x
     x_prime = x + dx                    # New x = starting x + change in x
     
-    P_metro = Metro(H(x),H(x_prime),B)  # metro probability given by metro function passing H(old x), H(new x), beta    
+    P_metro = Metro(H(x),H(x_prime),B)  # Metro probability given by metro function passing H(old x), H(new x), beta    
     if Accept(P_metro) == True:         # If the accept function gives out 'true' for the metro probability, we accept...
         accepted = np.append(accepted, H(x_prime))
-        x = x_prime                     # the new x into the list of accepted changes, and we set the x' to be the...
+        x = x_prime                     # The new x into the list of accepted changes, and we set the x' to be the...
         hits +=1                        # starting x for the next iteration. We also 'count' the change by adding 1 to 'hits'
         
-plt.plot(accepted)                      # plot the accepted x's 
+plt.plot(accepted)                      # Plot the accepted x's 
 
 accepted = accepted[1001:]
 
@@ -64,7 +64,7 @@ length = len(accepted)
 bin_size = length//no_bins
 bin_analysis = []
 
-# try using the scipy.stats.binned_statistic function for binning?
+# Try using the scipy.stats.binned_statistic function for binning?
 
 for i in range(no_bins):
     Bin = np.zeros(bin_size)
