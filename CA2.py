@@ -20,19 +20,19 @@ def H(x):                               # Hamiltonian
     return x**2
 
 def Metro(H, H_prime, B):               # Metropolis algorithm
-    DH = H_prime - H
-    if np.exp(-B*DH) > 1:
-        P_metro = 1
-    else: 
-        P_metro = np.exp(-B*DH)
+    DH = H_prime - H                    # Change in val of Hamiltonian = H(new x) - H(old x)
+    if np.exp(-B*DH) > 1:               # If e^beta*delta H > 1 i.e. change should be accepted
+        P_metro = 1                     # We set the value of the metropolis probability to be 1
+    else:                               # If it is not fully accepted, we set the value of P_metro
+        P_metro = np.exp(-B*DH)         # to be equal to e^beta*delta H > 1
     return P_metro
 
-def Accept(P_metro):
-    p = np.random.uniform(0,1)
-    if P_metro > p:
-        return True
+def Accept(P_metro):                    # Accept function
+    p = np.random.uniform(0,1)          # random assigned probability 
+    if P_metro > p:                     # If P_metro is larger than the random probability;
+        return True                     # we accept the change by assigning a boolean i.e. the change is 'true'
     else:
-        return False
+        return False                    # If not, assign 'false'; the change is not accepted
 
     
 accepted = np.array([])
