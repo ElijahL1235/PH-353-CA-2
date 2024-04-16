@@ -59,23 +59,21 @@ plt.plot(accepted)                      # Plot the accepted x's
 
 accepted = accepted[1001:]
 
-
-def Bin(accepted, no_bins = 50):
-    length = len(accepted)
-    bin_size = length//no_bins
-    bin_analysis = []
+no_bins = 50
+       
+length = len(accepted)
+bin_size = length//no_bins
+avg_mean = []  
+avg_dev = []                
     
-    for i in range(no_bins):
-        Bin = np.zeros(bin_size)
-        Bin = accepted[i*(bin_size) : i*(bin_size) + bin_size - 1]
-        bin_mean = np.mean(Bin)
-        bin_std = np.std(Bin)
-        bin_analysis.append([bin_mean, bin_std])
-        
-    avg_energy = np.mean(bin_mean)
-    return bin_analysis 
+for i in range(no_bins):            
+    Bin = np.zeros(bin_size)
+    Bin = accepted[i*(bin_size) : i*(bin_size) + bin_size - 1]
+    bin_mean = np.mean(Bin)
+    bin_std = np.std(Bin)
+    avg_mean.append([bin_mean])  
+    avg_dev.append([bin_std])
 
-yvals =  [row[0] for row in Bin(accepted)]
 
 plt.figure()
 plt.plot(accepted)
@@ -83,6 +81,27 @@ plt.grid()
 plt.title('Thermalised data set')
 
 plt.figure()
-plt.plot(yvals)
+plt.plot(avg_mean)
 plt.grid()
 plt.title('Binned Data Set')
+
+bin_list = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+bin_plot = []
+for b in bin_list:
+    bin_size = length//b  
+    avg_dev = []
+    for i in range(b):            
+        Bin = np.zeros(b)
+        Bin = accepted[i*(b) : i*(b) + b - 1]
+        bin_std = np.std(Bin)
+        avg_dev.append([bin_std])
+    bin_plot.append(np.mean(bin_std))
+    
+plt.figure()
+plt.plot(bin_list, bin_plot,"g*")
+plt.xlabel("Number of Bins")
+plt.ylabel("Standard Deviation")
+
+
+
+
