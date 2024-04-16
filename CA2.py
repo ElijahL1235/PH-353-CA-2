@@ -10,7 +10,7 @@ from scipy.stats import binned_statistic as gravy
 #B = 1/(kB*T)
 
 B = 100                                 # NB for B around 10 it takes too long to thermalise
-
+B_prime = 250
 n = 10000                               # Number of iterations
 
 accepted = np.array([])                 # Array of accepted changes, currently empty but will be appended to later
@@ -87,6 +87,8 @@ plt.title('Thermalised data set')
 plt.xlabel('Monte Carlo Time')
 plt.ylabel('Hamiltonian')
 
+expectval = np.mean(accepted)
+
 plt.figure()
 plt.plot(avg_mean)
 plt.grid()
@@ -94,6 +96,7 @@ plt.title('Binned Data Set')
 
 bin_list = [10, 20, 30, 40, 50, 60, 70, 80, 90]
 bin_plot = []
+
 for b in bin_list:
     bin_size = length//b  
     avg_dev = []
@@ -108,3 +111,21 @@ plt.figure()
 plt.plot(bin_list, bin_plot,"g*")
 plt.xlabel("Number of Bins")
 plt.ylabel("Standard Deviation")
+
+print(expectval)
+
+On = []                                # Observable numerator
+Od = []                                # Observable denominator
+
+for E in accepted:                      # For loop for the reweighting to guess beta prime expectation values
+    expo =  np.exp(-(B_prime - B)*E)
+    On = np.append(On, expo*E)
+    Od = np.append(Od, expo)
+
+num = np.mean(On)
+den = np.mean(Od)
+
+expectvalprime = num/den
+print(expectvalprime)
+
+
