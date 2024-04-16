@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 #kB = 1
 #T = 2
 #B = 1/(kB*T)
-B = 100                                 # For B around 10 it takes too long to settle
+B = 100                                 # NB for B around 10 it takes too long to thermalise
 
 n = 10000                               # Number of iterations
 
@@ -41,7 +41,7 @@ while hits <= n:                        # While the number of accepted changes i
                                         # equal to the number of desired iterations
     
     dx = np.random.uniform(-0.01,0.01)  # Generating the random change in x
-    x_prime = x + dx
+    x_prime = x + dx                    # New x = starting x + change in x
     
     P_metro = Metro(H(x),H(x_prime),B)
     
