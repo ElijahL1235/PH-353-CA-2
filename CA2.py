@@ -56,6 +56,11 @@ while hits <= n:                        # While the number of accepted changes i
         hits +=1                        # starting x for the next iteration. We also 'count' the change by adding 1 to 'hits'
         
 plt.plot(accepted)                      # Plot the accepted x's 
+plt.grid()                              
+plt.title('Monte Carlo Data Set')
+plt.xlabel('Monte Carlo Time')          # x axis is the monte carlo time / number of data points
+plt.ylabel('Hamiltonian') 
+
 
 accepted = accepted[1001:]
 
@@ -76,14 +81,17 @@ for i in range(no_bins):
 
 
 plt.figure()
-plt.plot(accepted)
+plt.plot(accepted)                      # Plots the trimmed accepted data; data that has now thermalised
 plt.grid()
 plt.title('Thermalised data set')
+plt.xlabel('Monte Carlo Time')
+plt.ylabel('Hamiltonian')
 
 plt.figure()
 plt.plot(avg_mean)
 plt.grid()
 plt.title('Binned Data Set')
+<<<<<<< HEAD
 
 bin_list = [10, 20, 30, 40, 50, 60, 70, 80, 90]
 bin_plot = []
@@ -105,3 +113,7 @@ plt.ylabel("Standard Deviation")
 
 
 
+=======
+plt.xlabel('')
+plt.ylabel('')
+>>>>>>> 9de2c9507eec23bde6277a471460b4231afac234
