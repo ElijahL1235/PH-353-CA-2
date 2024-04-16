@@ -128,4 +128,24 @@ den = np.mean(Od)
 expectvalprime = num/den
 print(expectvalprime)
 
+expectvalprimes = []
+bprimes = range(100, 800, 100)
+for b in bprimes:
+    
+    for E in accepted:                      # For loop for the reweighting to guess beta prime expectation values
+        expo =  np.exp(-(b - B)*E)
+        On = np.append(On, expo*E)
+        Od = np.append(Od, expo)
+
+    num = np.mean(On)
+    den = np.mean(Od)
+
+    expectvalprime = num/den
+    expectvalprimes.append(expectvalprime)
+    
+plt.figure()
+plt.plot(bprimes, expectvalprimes, 'g*')
+plt.title('Beta Prime trend')
+plt.xlabel('Beta Prime')
+plt.ylabel('Average Hamiltonian')
 
