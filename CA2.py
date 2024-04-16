@@ -91,7 +91,6 @@ plt.figure()
 plt.plot(avg_mean)
 plt.grid()
 plt.title('Binned Data Set')
-<<<<<<< HEAD
 
 bin_list = [10, 20, 30, 40, 50, 60, 70, 80, 90]
 bin_plot = []
@@ -109,11 +108,3 @@ plt.figure()
 plt.plot(bin_list, bin_plot,"g*")
 plt.xlabel("Number of Bins")
 plt.ylabel("Standard Deviation")
-
-
-
-
-=======
-plt.xlabel('')
-plt.ylabel('')
->>>>>>> 9de2c9507eec23bde6277a471460b4231afac234
