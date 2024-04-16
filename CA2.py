@@ -35,17 +35,18 @@ def Accept(P_metro):                    # Accept function
         return False                    # If not, assign 'false'; the change is not accepted
 
     
-accepted = np.array([])
+accepted = np.array([])                 # Array of accepted changes, currently empty but will be appended to later
 
-while hits <= n:
+while hits <= n:                        # While the number of accepted changes is less than or   
+                                        # equal to the number of desired iterations
     
-    dx = np.random.uniform(-0.01,0.01)
+    dx = np.random.uniform(-0.01,0.01)  # Generating the random change in x
     x_prime = x + dx
     
     P_metro = Metro(H(x),H(x_prime),B)
     
     if Accept(P_metro) == True:
-        accepted = np.append(accepted, x)
+        accepted = np.append(accepted, x_prime)
         x = x_prime
         hits +=1
         
