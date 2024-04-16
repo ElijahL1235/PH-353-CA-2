@@ -59,27 +59,30 @@ plt.plot(accepted)                      # Plot the accepted x's
 
 accepted = accepted[1001:]
 
-no_bins = 500
-length = len(accepted)
-bin_size = length//no_bins
-bin_analysis = []
 
-# Try using the scipy.stats.binned_statistic function for binning?
-
-for i in range(no_bins):
-    Bin = np.zeros(bin_size)
-    Bin = accepted[i*(bin_size) : i*(bin_size) + bin_size - 1]
-    bin_mean = np.mean(Bin)
-    bin_std = np.std(Bin)
-    bin_analysis.append([bin_mean, bin_std])
+def Bin(accepted, no_bins = 50):
+    length = len(accepted)
+    bin_size = length//no_bins
+    bin_analysis = []
     
-print(Bin)
-print(bin_analysis)
+    for i in range(no_bins):
+        Bin = np.zeros(bin_size)
+        Bin = accepted[i*(bin_size) : i*(bin_size) + bin_size - 1]
+        bin_mean = np.mean(Bin)
+        bin_std = np.std(Bin)
+        bin_analysis.append([bin_mean, bin_std])
+        
+    avg_energy = np.mean(bin_mean)
+    return bin_analysis 
+
+yvals =  [row[0] for row in Bin(accepted)]
 
 plt.figure()
 plt.plot(accepted)
-plt.plot()
 plt.grid()
 plt.title('Thermalised data set')
 
-
+plt.figure()
+plt.plot(yvals)
+plt.grid()
+plt.title('Binned Data Set')
