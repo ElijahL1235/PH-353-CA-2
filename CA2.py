@@ -3,7 +3,7 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
-
+from scipy.stats import binned_statistic as gravy
 
 #kB = 1
 #T = 2
@@ -19,7 +19,6 @@ x = 10                                   # Initial condition
 
 hits = 0                                # Number of accepted x values
 
-n_per_bin = 18                          # Number of iterations per bin, there will 500 bins total
 
 # for reweighting, consider removing the first 1000 results 
 # then for the gaussian system bit, we take the mean of the remaining n-1000 points
@@ -48,7 +47,7 @@ def Accept(P_metro):                    # Accept function
 while hits <= n:                        # While the number of accepted changes is less than or   
                                         # equal to the number of desired iterations
     
-    dx = np.random.uniform(-1,1)        # Generating the random change in x
+    dx = np.random.uniform(-0.1,0.1)        # Generating the random change in x
     x_prime = x + dx                    # New x = starting x + change in x
     
     P_metro = Metro(H(x),H(x_prime),B)  # metro probability given by metro function passing H(old x), H(new x), beta    
@@ -59,19 +58,21 @@ while hits <= n:                        # While the number of accepted changes i
         
 plt.plot(accepted)                      # plot the accepted x's 
 
-accepted = accepted[1000:]
+accepted = accepted[1001:]
 
-bins = np.zeros(500)
-for a in range(500):
-    in_bin = 0
-    for b in range(n_per_bin):
-        pt_in_bin = (a * n_per_bin) + b
-        in_bin += H(accepted[pt_in_bin])
-    bins = in_bin / n_per_bin
+no_bins = 500
+length = len(accepted)
+bin_size = length//no_bins
+for i in range(no_bins):
+    Bin = np.zeros(bin_size)
+    Bin = accepted[i*(bin_size) : i*(bin_size) + bin_size - 1]
+    
+    
+print(Bin)
 
 plt.figure()
 plt.plot(accepted)
-plt.plot(bins)
+plt.plot()
 plt.grid()
 plt.title('Thermalised data set')
 
