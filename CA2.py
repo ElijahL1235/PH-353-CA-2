@@ -8,18 +8,24 @@ import matplotlib.pyplot as plt
 #kB = 1
 #T = 2
 #B = 1/(kB*T)
+
 B = 100                                 # NB for B around 10 it takes too long to thermalise
 
 n = 10000                               # Number of iterations
+
+accepted = np.array([])                 # Array of accepted changes, currently empty but will be appended to later
+
+x = 2                                   # Initial condition
+
+hits = 0                                # Number of accepted x values
+
+n_per_bin = 18                          # Number of iterations per bin, there will 500 bins total
 
 # for reweighting, consider removing the first 1000 results 
 # then for the gaussian system bit, we take the mean of the remaining n-1000 points
 # due to autocorrelation, we should bin the remaining 9000 points first
 # before we average. let's try bin size of 18 as that yields 500 bins from 9000 points
 
-x = 2                                   # Initial condition
-
-hits = 0                                # Number of accepted x values
 
 def H(x):                               # Hamiltonian
     return x**2
@@ -39,8 +45,6 @@ def Accept(P_metro):                    # Accept function
     else:
         return False                    # If not, assign 'false'; the change is not accepted
 
-    
-accepted = np.array([])                 # Array of accepted changes, currently empty but will be appended to later
 
 while hits <= n:                        # While the number of accepted changes is less than or   
                                         # equal to the number of desired iterations
@@ -51,29 +55,22 @@ while hits <= n:                        # While the number of accepted changes i
     P_metro = Metro(H(x),H(x_prime),B)  # metro probability given by metro function passing H(old x), H(new x), beta
     
     if Accept(P_metro) == True:         # If the accept function gives out 'true' for the metro probability, we accept...
-        accepted = np.append(accepted, x_prime)
+        accepted = np.append(accepted, H(x_prime))
         x = x_prime                     # the new x into the list of accepted changes, and we set the x' to be the...
         hits +=1                        # starting x for the next iteration. We also 'count' the change by adding 1 to 'hits'
         
 plt.plot(accepted)                      # plot the accepted x's 
 
-
-# Removing the first 1000 values:
-
 accepted = accepted[1000:]
+
+bins = np.zeros(500)
+for a in range(500):
+    in_bin = 0
+    for b in range(n_per_bin):
+        pt_in_bin = (a * n_per_bin) + b
+        in_bin += H(accepted[pt_in_bin])
+    bins = in_bin / n_per_bin
 
 plt.figure()
 plt.plot(accepted)
-
-
-# BINNING
-
-n_per_bin = 18
-
-bins = np.zeros(9000)                  #9000 is the length of accepted after trimming
-for a in range(9000):
-    in_the_bin = 0
-    for b in range(n_per_bin):
-        dx = np.random.uniform(-0.01, 0.01)
-        
-    
+plt.plot(bins)
